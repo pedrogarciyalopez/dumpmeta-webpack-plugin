@@ -22,7 +22,7 @@ export class DumpMetaPlugin {
   apply(compiler: Compiler) {
     compiler.hooks.done.tap(this.constructor.name, stats => {
       const json = JSON.stringify(this.options.prepare(stats), null, 2);
-      return new Promise((resolve, reject) => {
+      return new Promise<void>((resolve, reject) => {
         fs.writeFile(this.options.filename, json, 'utf8', error => {
           if (error) {
             reject(error);
